@@ -19,7 +19,8 @@ int main() {
     fclose(file);
     // Loop menu utama
     do {
-        //system("cls");  // Membersihkan layar konsol
+        //gabisa nginput gatau kenapa
+        system("cls");  // Membersihkan layar konsol
         printf("1.  Menambah data pasien\n");
         printf("2.  Mengubah data pasien\n");
         printf("3.  Menghapus data pasien\n");
@@ -41,13 +42,15 @@ int main() {
     {
     case 1:
         // Menambah data pasien
+        menambah_data_pasien(&head);
         break;
     case 2:
         // Mengubah data pasien
+        mengubah_data_pasien(head);
         break;
     case 3:
-        printf("True");
         //menghapus_data_pasian(&head);
+        menghapus_data_pasian(&head);
         break;
     case 4:
         // Mencari data pasien
@@ -88,12 +91,10 @@ int main() {
     default:
         printf("Pilihan tidak valid.\n");
     }
-    //Gatau kenapa ini bikin gabisa input -Adit
-    /*
     printf("\n");
     printf("Tekan tombol apapun untuk melanjutkan");
     _getch();  // Menunggu input dari user sebelum melanjutkan
-    */
+    
     } while (ch != 0);  // Loop terus menerus hingga user memilih keluar (0)
 
     // Bebaskan memori dari linked list sebelum keluar dari program
