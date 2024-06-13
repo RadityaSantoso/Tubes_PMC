@@ -1,4 +1,5 @@
 
+
 Pasien* cari_data_pasien(Pasien* head, const char* nama_pasien){
     if (head==NULL){
         printf("Data kosong\n");
@@ -14,12 +15,14 @@ Pasien* cari_data_pasien(Pasien* head, const char* nama_pasien){
     return NULL;
 }
 
-Pasien* input_data_pasien_baru(Pasien* pasien){
+void input_data_pasien_baru(Pasien* pasien){
     char temp_string[MAX];
-    int temp_int;
-
+    int temp_int;    
     printf("\nMasukkan nama baru pasien: ");
     fgets(temp_string,MAX,stdin);
+    if(temp_string[0]=='\n'||temp_string[0]=='\0'){ //error checker dengan fgets
+        fgets(temp_string,MAX,stdin);
+    }
     strcpy(pasien->nama_lengkap,temp_string);
     printf("Masukkan alamat baru pasien: ");
     fgets(temp_string,MAX,stdin);
@@ -34,7 +37,8 @@ Pasien* input_data_pasien_baru(Pasien* pasien){
     fgets(temp_string,MAX,stdin);
     strcpy(pasien->tanggal_lahir,temp_string);
     printf("Masukkan umur baru pasien: ");
-    scanf("%d", temp_int);
+    fgets(temp_string,MAX,stdin);
+    temp_int=atoi(temp_string);
     pasien->umur=temp_int;
     printf("Masukkan nomor BPJS baru pasien: ");
     fgets(temp_string,MAX,stdin);
@@ -49,7 +53,9 @@ void mengubah_data_pasien(Pasien* head){
     char nama_pasien[MAX];
     printf("Masukkan nama lengkap pasien: ");
     fgets(nama_pasien,MAX,stdin);
-
+    if(nama_pasien[0]=='\n'||nama_pasien[0]=='\0'){ //error checker dengan fgets
+        fgets(nama_pasien,MAX,stdin);
+    }
     //Pencarian
     Pasien* pasien = cari_data_pasien(head, nama_pasien);
     if(pasien==NULL){

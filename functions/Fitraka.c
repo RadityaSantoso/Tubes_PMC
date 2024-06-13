@@ -39,7 +39,7 @@ void freeList(Pasien* head) {
 
 void bacaDataPasien(FILE* file, Pasien** head) {
     char line[MAX_LINE];
-    fgets(line,sizeof(line), file); //Adit nambah ini biar skip first line
+    fgets(line,sizeof(line), file); //Gw nambah ini biar skip first line -Adit
     while (fgets(line, sizeof(line), file)) {
         int no, umur;
         char nama_lengkap[MAX], alamat[MAX], kota[MAX], tempat_lahir[MAX], tanggal_lahir[MAX], no_bpjs[MAX], id_pasien[MAX];
