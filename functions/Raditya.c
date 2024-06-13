@@ -4,7 +4,6 @@ void remove_string_end_line(char str[MAX]){
     }
 }
 Pasien* cari_data_pasien(Pasien* head, char nama_pasien[MAX]){
-    
     remove_string_end_line(nama_pasien);
     if (head==NULL){
         printf("Data kosong\n");
@@ -70,6 +69,7 @@ void mengubah_data_pasien(Pasien* head){
     if(nama_pasien[0]=='\n'||nama_pasien[0]=='\0'){ //error checker dengan fgets
         fgets(nama_pasien,MAX,stdin);
     }
+
     //Pencarian
     Pasien* pasien = cari_data_pasien(head, nama_pasien);
     if(pasien==NULL){
@@ -108,6 +108,7 @@ void menghapus_data_pasian(Pasien** head){
     if(nama_pasien[0]=='\n'||nama_pasien[0]=='\0'){ //error checker dengan fgets
         fgets(nama_pasien,MAX,stdin);
     }
+
     //Pencarian
     Pasien* pasien = cari_data_pasien(*head, nama_pasien);
     if(pasien==NULL){
@@ -130,4 +131,25 @@ void menghapus_data_pasian(Pasien** head){
     free(pasien);
     printf("Penghapusan pasien %s berhasil.", nama_pasien);
     return;
+}
+
+void print_pasien(Pasien* head){
+    //Input nama pasien
+    char nama_pasien[MAX];
+    printf("Masukkan nama lengkap pasien: ");
+    fgets(nama_pasien,MAX,stdin);
+    if(nama_pasien[0]=='\n'||nama_pasien[0]=='\0'){ //error checker dengan fgets
+        fgets(nama_pasien,MAX,stdin);
+    }
+
+    //Pencarian
+    Pasien* pasien = cari_data_pasien(head,nama_pasien);
+    if(pasien==NULL){
+        printf("Pasien tidak ditemukan pada Data.\n");
+        return;
+    }
+
+    printf("Pasien:\n\nNama Lengkap: %s\nAlamat: %s\nKota: %s\nTempat Lahir: %s\nTanggal Lahir: %s\nUmur: %d\nNo. BPJS: %s\nID Pasien:%s\n\n"
+            ,pasien->nama_lengkap,pasien->alamat,pasien->kota,pasien->tempat_lahir,pasien->tanggal_lahir,pasien->umur,pasien->no_bpjs,pasien->id_pasien);
+    
 }

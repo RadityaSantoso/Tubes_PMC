@@ -53,7 +53,8 @@ int main() {
         menghapus_data_pasian(&head);
         break;
     case 4:
-        // Mencari data pasien
+        // Mencari data pasien dan print
+        print_pasien(head);
         break;
     case 5:
         // Menambah riwayat diagnosis dan penanganan
@@ -92,7 +93,7 @@ int main() {
         printf("Pilihan tidak valid.\n");
     }
     printf("\n");
-    printf("Tekan tombol apapun untuk melanjutkan");
+    printf("Tekan tombol apapun untuk melanjutkan\n");
     _getch();  // Menunggu input dari user sebelum melanjutkan
     } while (ch != 0);  // Loop terus menerus hingga user memilih keluar (0)
 
