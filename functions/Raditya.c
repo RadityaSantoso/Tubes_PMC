@@ -96,6 +96,7 @@ void menambah_data_pasien(Pasien** head){
     }
     temp->next=malloc(sizeof(Pasien));
     input_data_pasien_baru(temp);
+    temp->next->next=NULL;
     return;
 }
 
