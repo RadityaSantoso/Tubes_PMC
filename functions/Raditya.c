@@ -1,6 +1,11 @@
-
-
-Pasien* cari_data_pasien(Pasien* head, const char* nama_pasien){
+void remove_string_end_line(char str[MAX]){
+    if(str[strlen(str)-1]=='\n'){
+        str[strlen(str)-1]='\0';
+    }
+}
+Pasien* cari_data_pasien(Pasien* head, char nama_pasien[MAX]){
+    
+    remove_string_end_line(nama_pasien);
     if (head==NULL){
         printf("Data kosong\n");
         return NULL;
@@ -15,6 +20,7 @@ Pasien* cari_data_pasien(Pasien* head, const char* nama_pasien){
     return NULL;
 }
 
+
 void input_data_pasien_baru(Pasien* pasien){
     char temp_string[MAX];
     int temp_int;    
@@ -23,28 +29,36 @@ void input_data_pasien_baru(Pasien* pasien){
     if(temp_string[0]=='\n'||temp_string[0]=='\0'){ //error checker dengan fgets
         fgets(temp_string,MAX,stdin);
     }
+    remove_string_end_line(temp_string);
     strcpy(pasien->nama_lengkap,temp_string);
     printf("Masukkan alamat baru pasien: ");
     fgets(temp_string,MAX,stdin);
+    remove_string_end_line(temp_string);
     strcpy(pasien->alamat,temp_string);
     printf("Masukkan kota baru pasien: ");
     fgets(temp_string,MAX,stdin);
+    remove_string_end_line(temp_string);
     strcpy(pasien->kota,temp_string);
     printf("Masukkan tempat lahir baru pasien: ");
     fgets(temp_string,MAX,stdin);
+    remove_string_end_line(temp_string);
     strcpy(pasien->tempat_lahir,temp_string); 
     printf("Masukkan tanggal lahir baru pasien: ");
     fgets(temp_string,MAX,stdin);
+    remove_string_end_line(temp_string);
     strcpy(pasien->tanggal_lahir,temp_string);
     printf("Masukkan umur baru pasien: ");
     fgets(temp_string,MAX,stdin);
+    remove_string_end_line(temp_string);
     temp_int=atoi(temp_string);
     pasien->umur=temp_int;
     printf("Masukkan nomor BPJS baru pasien: ");
     fgets(temp_string,MAX,stdin);
+    remove_string_end_line(temp_string);
     strcpy(pasien->no_bpjs,temp_string);
-    printf("\nMasukkan id baru pasien: ");
+    printf("Masukkan id baru pasien: ");
     fgets(temp_string,MAX,stdin);
+    remove_string_end_line(temp_string);
     strcpy(pasien->id_pasien,temp_string); 
 }
 
@@ -90,7 +104,9 @@ void menghapus_data_pasian(Pasien** head){
     char nama_pasien[MAX];
     printf("Masukkan nama lengkap pasien: ");
     fgets(nama_pasien,MAX,stdin);
-
+    if(nama_pasien[0]=='\n'||nama_pasien[0]=='\0'){ //error checker dengan fgets
+        fgets(nama_pasien,MAX,stdin);
+    }
     //Pencarian
     Pasien* pasien = cari_data_pasien(*head, nama_pasien);
     if(pasien==NULL){

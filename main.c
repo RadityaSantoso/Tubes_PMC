@@ -93,7 +93,7 @@ int main() {
     }
     printf("\n");
     printf("Tekan tombol apapun untuk melanjutkan");
-    //_getch();  // Menunggu input dari user sebelum melanjutkan
+    _getch();  // Menunggu input dari user sebelum melanjutkan
     } while (ch != 0);  // Loop terus menerus hingga user memilih keluar (0)
 
     // Bebaskan memori dari linked list sebelum keluar dari program

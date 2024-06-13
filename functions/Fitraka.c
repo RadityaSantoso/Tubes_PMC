@@ -29,6 +29,7 @@ void insertPasien(Pasien** head, Pasien* newPasien) {
 
 // Fungsi untuk membebaskan memori dari linked list
 void freeList(Pasien* head) {
+    //
     Pasien* temp;
     while (head != NULL) {
         temp = head;
