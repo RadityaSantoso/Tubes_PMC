@@ -96,7 +96,20 @@ int main() {
     printf("Tekan tombol apapun untuk melanjutkan\n");
     _getch();  // Menunggu input dari user sebelum melanjutkan
     } while (ch != 0);  // Loop terus menerus hingga user memilih keluar (0)
-
+    /*
+    int check=0;
+    do{
+    printf("\nMasukkan nama folder yang akan menyetor file baru.\n");
+    char filedir[MAX];
+    check = mkdir(filedir);
+    if(!check){
+        printf("Pembuatan file Berhasil.\n");
+    }
+    else{
+        printf("Pembuatan file Gagal.\n");
+    }
+    }while(check!=1);
+    */
     // Bebaskan memori dari linked list sebelum keluar dari program
     freeList(head);
   return 0;

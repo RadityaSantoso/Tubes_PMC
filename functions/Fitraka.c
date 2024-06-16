@@ -38,6 +38,24 @@ void freeList(Pasien* head) {
     }
 }
 
+void format_date(const char* str){
+    int len = strlen(str);
+
+    //checker if format 1 or 2 {1 is spaces, 2 is -'s}, default 2
+    int format; 
+    char* checker=strchr(str, '-');
+    if(checker==NULL){
+        format=1;
+    }
+    else{
+        format =2;
+    }
+    char* temp_string = malloc(sizeof(MAX));
+    if(format==1){
+        
+    }
+}
+
 void bacaDataPasien(FILE* file, Pasien** head) {
     char line[MAX_LINE];
     fgets(line,sizeof(line), file); //Gw nambah ini biar skip first line -Adit
@@ -64,11 +82,11 @@ void bacaDataPasien(FILE* file, Pasien** head) {
 
         token = strtok(NULL, "\",\"");
         strcpy(kota, token);
-
         token = strtok(NULL, "\",\"");
         strcpy(tempat_lahir, token);
 
         token = strtok(NULL, "\",\"");
+        format_date(token);
         strcpy(tanggal_lahir, token);
 
         token = strtok(NULL, "\",\"");

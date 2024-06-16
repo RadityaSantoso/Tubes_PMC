@@ -3,7 +3,7 @@
 #include <string.h>
 #include <conio.h>
 
-#define MAX 100
+#define MAX 50 //gue ganti biar strukt data lebih kecil
 #define MAX_LINE 500
 
 // Definisikan struktur Riwayat untuk data riwayat

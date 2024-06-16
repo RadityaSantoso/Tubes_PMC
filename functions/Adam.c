@@ -1,5 +1,5 @@
 // #include "header.c"
-
+// #include "Fitraka.c"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -8,6 +8,7 @@
 #define MAX 100
 #define MAX_LINE 500
 
+/*
 typedef struct Pasien {
     char nama_lengkap[MAX];
     char alamat[MAX];
@@ -29,7 +30,7 @@ typedef struct Riwayat
     char kontrol[MAX];
     int biaya;
 }Riwayat;
-
+*/
 void readCSV(const char* filename, Riwayat* riwayatArray, int* count) {
     FILE* file = fopen(filename, "r");
     if (file == NULL) {
@@ -68,7 +69,7 @@ void readCSV(const char* filename, Riwayat* riwayatArray, int* count) {
 
     fclose(file);
 }
-
+/*
 // Fungsi untuk membuat node baru untuk pasien
 Pasien* createPasien(char* nama_lengkap, char* alamat, char* kota, char* tempat_lahir, char* tanggal_lahir, int umur, char* no_bpjs, char* id_pasien) {
     Pasien* newPasien = (Pasien*)malloc(sizeof(Pasien));
@@ -154,7 +155,7 @@ void bacaDataPasien(FILE* file, Pasien** head) {
         insertPasien(head, newPasien);
     }
 }
-
+*/
 // create a function to print pasien linked list
 void printPasienList(Pasien* head) {
     Pasien* temp = head;

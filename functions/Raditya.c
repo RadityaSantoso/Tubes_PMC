@@ -149,7 +149,7 @@ void print_pasien(Pasien* head){
         return;
     }
 
-    printf("Pasien:\n\nNama Lengkap: %s\nAlamat: %s\nKota: %s\nTempat Lahir: %s\nTanggal Lahir: %s\nUmur: %d\nNo. BPJS: %s\nID Pasien:%s\n\n"
+    printf("Pasien:\n\nNama Lengkap: %s\nAlamat: %s\nKota: %s\nTempat Lahir: %s\nTanggal Lahir: %s\nUmur: %d\nNo. BPJS: %s\nID Pasien: %s\n\n"
             ,pasien->nama_lengkap,pasien->alamat,pasien->kota,pasien->tempat_lahir,pasien->tanggal_lahir,pasien->umur,pasien->no_bpjs,pasien->id_pasien);
     
 }
