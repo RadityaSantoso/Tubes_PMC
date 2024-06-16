@@ -1,17 +1,19 @@
+#include "header.c"
+
 void remove_string_end_line(char str[MAX]){
     if(str[strlen(str)-1]=='\n'){
         str[strlen(str)-1]='\0';
     }
 }
-Pasien* cari_data_pasien(Pasien* head, char nama_pasien[MAX]){
-    remove_string_end_line(nama_pasien);
+Pasien* cari_data_pasien(Pasien* head, char no_induk_pasien[MAX]){
+    remove_string_end_line(no_induk_pasien);
     if (head==NULL){
         printf("Data kosong\n");
         return NULL;
     }
     Pasien* temp=head;
     while(temp!=NULL){
-        if(strcmp(temp->nama_lengkap, nama_pasien)==0){
+        if(strcmp(temp->id_pasien, no_induk_pasien)==0){
             return temp;
         }
         temp=temp->next;
@@ -63,15 +65,15 @@ void input_data_pasien_baru(Pasien* pasien){
 
 void mengubah_data_pasien(Pasien* head){
     //Input nama pasien
-    char nama_pasien[MAX];
-    printf("Masukkan nama lengkap pasien: ");
-    fgets(nama_pasien,MAX,stdin);
-    if(nama_pasien[0]=='\n'||nama_pasien[0]=='\0'){ //error checker dengan fgets
-        fgets(nama_pasien,MAX,stdin);
+    char no_induk_pasien[MAX];
+    printf("Masukkan nomor induk pasien: ");
+    fgets(no_induk_pasien,MAX,stdin);
+    if(no_induk_pasien[0]=='\n'||no_induk_pasien[0]=='\0'){ //error checker dengan fgets
+        fgets(no_induk_pasien,MAX,stdin);
     }
 
     //Pencarian
-    Pasien* pasien = cari_data_pasien(head, nama_pasien);
+    Pasien* pasien = cari_data_pasien(head, no_induk_pasien);
     if(pasien==NULL){
         printf("Pasien tidak ditemukan pada Data.\n");
         return;
@@ -102,15 +104,15 @@ void menambah_data_pasien(Pasien** head){
 
 void menghapus_data_pasian(Pasien** head){
     //Input nama pasien
-    char nama_pasien[MAX];
-    printf("Masukkan nama lengkap pasien: ");
-    fgets(nama_pasien,MAX,stdin);
-    if(nama_pasien[0]=='\n'||nama_pasien[0]=='\0'){ //error checker dengan fgets
-        fgets(nama_pasien,MAX,stdin);
+    char no_induk_pasien[MAX];
+    printf("Masukkan nomor induk pasien pasien: ");
+    fgets(no_induk_pasien,MAX,stdin);
+    if(no_induk_pasien[0]=='\n'||no_induk_pasien[0]=='\0'){ //error checker dengan fgets
+        fgets(no_induk_pasien,MAX,stdin);
     }
 
     //Pencarian
-    Pasien* pasien = cari_data_pasien(*head, nama_pasien);
+    Pasien* pasien = cari_data_pasien(*head, no_induk_pasien);
     if(pasien==NULL){
         printf("Pasien tidak ditemukan pada Data.\n");
         return;
@@ -120,7 +122,7 @@ void menghapus_data_pasian(Pasien** head){
     if(*head==pasien){
         *head=pasien->next;
         free(pasien);
-        printf("Penghapusan pasien %s berhasil.", nama_pasien);
+        printf("Penghapusan pasien %s berhasil.", no_induk_pasien);
         return;
     }
     Pasien* temp=*head;
@@ -129,21 +131,21 @@ void menghapus_data_pasian(Pasien** head){
     }
     temp->next=pasien->next;
     free(pasien);
-    printf("Penghapusan pasien %s berhasil.", nama_pasien);
+    printf("Penghapusan pasien %s berhasil.", no_induk_pasien);
     return;
 }
 
 void print_pasien(Pasien* head){
     //Input nama pasien
-    char nama_pasien[MAX];
-    printf("Masukkan nama lengkap pasien: ");
-    fgets(nama_pasien,MAX,stdin);
-    if(nama_pasien[0]=='\n'||nama_pasien[0]=='\0'){ //error checker dengan fgets
-        fgets(nama_pasien,MAX,stdin);
+    char no_induk_pasien[MAX];
+    printf("Masukkan nomor induk pasien: ");
+    fgets(no_induk_pasien,MAX,stdin);
+    if(no_induk_pasien[0]=='\n'||no_induk_pasien[0]=='\0'){ //error checker dengan fgets
+        fgets(no_induk_pasien,MAX,stdin);
     }
 
     //Pencarian
-    Pasien* pasien = cari_data_pasien(head,nama_pasien);
+    Pasien* pasien = cari_data_pasien(head,no_induk_pasien);
     if(pasien==NULL){
         printf("Pasien tidak ditemukan pada Data.\n");
         return;
