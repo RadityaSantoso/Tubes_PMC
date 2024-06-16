@@ -1,4 +1,4 @@
-#include "header.c"
+
 // Fungsi untuk membuat node baru untuk pasien
 Pasien* createPasien(char* nama_lengkap, char* alamat, char* kota, char* tempat_lahir, char* tanggal_lahir, int umur, char* no_bpjs, char* id_pasien) {
     Pasien* newPasien = (Pasien*)malloc(sizeof(Pasien));
@@ -38,45 +38,6 @@ void freeList(Pasien* head) {
     }
 }
 
-void format_date(const char* str){
-    int len = strlen(str);
-
-    //checker if format 1 or 2 {1 is spaces, 2 is -'s}, default 2
-    char delimiter;
-    char* checker=strchr(str, '-');
-    if(checker==NULL){
-        delimiter='-';
-    }
-    else{
-        delimiter=' ';
-    }
-    //splitting
-    char* temp = strchr(str,delimiter);
-    char day[5];
-    int starting_index=0;
-    for(int i=starting_index; i<temp-str;i++){
-        day[i-starting_index]=str[i];
-    }
-    day[temp-str-starting_index]='\0';
-
-    char month[MAX];
-    starting_index=temp-str+1;
-    temp=strchr(temp+1,delimiter);
-    for(int i=starting_index; i<temp-str;i++){
-        month[i-starting_index]=str[i];
-    }
-    month[temp-str-starting_index]='\0';
-
-    char year[5];
-    starting_index=temp-str+1;
-    for(int i=starting_index; i<strlen(str);i++){
-        year[i-starting_index]=str[i];
-    }
-    year[strlen(str)-starting_index]='\0';
-
-
-}
-
 void bacaDataPasien(FILE* file, Pasien** head) {
     char line[MAX_LINE];
     fgets(line,sizeof(line), file); //Gw nambah ini biar skip first line -Adit
@@ -107,7 +68,6 @@ void bacaDataPasien(FILE* file, Pasien** head) {
         strcpy(tempat_lahir, token);
 
         token = strtok(NULL, "\",\"");
-        format_date(token);
         strcpy(tanggal_lahir, token);
 
         token = strtok(NULL, "\",\"");

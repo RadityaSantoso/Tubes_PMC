@@ -7,9 +7,43 @@
 #define MAX 50
 
 void first_date_format(char* str){
-    if(strcmp(str, "January")==0){
-
+    if(strcmp(str, "Januari")==0){
+        strcpy(str,"01");
     }
+    else if(strcmp(str, "Februari")==0){
+        strcpy(str,"02");
+    }
+    else if(strcmp(str, "Maret")==0){
+        strcpy(str,"03");
+    }
+    else if(strcmp(str, "April")==0){
+        strcpy(str,"04");
+    }
+    else if(strcmp(str, "Mei")==0){
+        strcpy(str,"05");
+    }
+    else if(strcmp(str, "Juni")==0){
+        strcpy(str,"06");
+    }
+    else if(strcmp(str, "Juli")==0){
+        strcpy(str,"07");
+    }
+    else if(strcmp(str, "Agustus")==0){
+        strcpy(str,"08");
+    }
+    else if(strcmp(str, "September")==0){
+        strcpy(str,"09");
+    }
+    else if(strcmp(str, "Oktober")==0){
+        strcpy(str,"10");
+    }
+    else if(strcmp(str, "November")==0){
+        strcpy(str,"11");
+    }
+    else if(strcmp(str, "Desember")==0){
+        strcpy(str,"12");
+    }
+
 }
 
 void second_date_format(char* str){
@@ -63,8 +97,10 @@ char* format_date(const char* str){
     else{
         delimiter='-';
     }
+
     //splitting
-    char* temp = strchr(str,delimiter);
+    //char* temp = strchr(str,delimiter);
+    char* temp = strchr(str, delimiter);
     char day[5];
     int starting_index=0;
     for(int i=starting_index; i<temp-str;i++){
@@ -96,7 +132,7 @@ char* format_date(const char* str){
         second_date_format(month);
     }
     else{
-
+        first_date_format(month);
     }
     output[strlen(year)]=month[0];
     output[strlen(year)+1]=month[1];
@@ -114,7 +150,8 @@ char* format_date(const char* str){
 
 int main(){
     char input_string[50],formatted_date[50];
-    scanf("%s",input_string);
+    fgets(input_string,MAX,stdin);
+    input_string[strlen(input_string)-1]='\0';
     strcpy(formatted_date,format_date(input_string));
     printf("%s", formatted_date);
 }
