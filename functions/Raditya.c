@@ -279,22 +279,24 @@ char* format_date(const char* str){
     for(int i=0; i<strlen(year);i++){
         output[i]=year[i];
     }
+    output[strlen(year)]='-';
     if(delimiter=='-'){
         second_date_format(month);
     }
     else{
         first_date_format(month);
     }
-    output[strlen(year)]=month[0];
-    output[strlen(year)+1]=month[1];
+    output[strlen(year)+1]=month[0];
+    output[strlen(year)+2]=month[1];
+    output[strlen(year)+3]='-';
     if(strlen(day)==1){
-        output[2+strlen(year)]='0';
-        output[3+strlen(year)]=day[0];
+        output[4+strlen(year)]='0';
+        output[5+strlen(year)]=day[0];
     }
     else{
-        output[2+strlen(year)]=day[0];
-        output[3+strlen(year)]=day[1];
+        output[4+strlen(year)]=day[0];
+        output[5+strlen(year)]=day[1];
     }
-    output[4+strlen(year)]='\0';
+    output[6+strlen(year)]='\0';
     return output;
 }

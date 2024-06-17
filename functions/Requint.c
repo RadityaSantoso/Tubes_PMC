@@ -1,3 +1,4 @@
+/*
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -5,6 +6,7 @@
 
 #define MAX 100
 #define MAX_LINE 500
+*/
 
 typedef struct Disease {
     char Nama[MAX];
