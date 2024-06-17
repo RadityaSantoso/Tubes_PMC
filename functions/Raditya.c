@@ -1,4 +1,4 @@
-#include "header.c"
+//#include "header.c"
 
 void remove_string_end_line(char str[MAX]){
     if(str[strlen(str)-1]=='\n'){
