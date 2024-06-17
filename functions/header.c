@@ -36,3 +36,4 @@ typedef struct Pasien {
     char id_pasien[MAX];
     struct Pasien* next;
 } Pasien;
+

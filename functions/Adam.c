@@ -157,6 +157,24 @@ void bacaDataPasien(FILE* file, Pasien** head) {
     }
 }
 */
+int bulanToNumber (char a []){
+
+    if (strcmp(a, "Januari")==0||strcmp(a, "Jan")==0) return 1;
+    else if (strcmp(a, "Februari")==0||strcmp(a, "Feb")==0) return 2;
+    else if (strcmp(a, "Maret")==0||strcmp(a, "Mar")==0) return 3;
+    else if (strcmp(a, "April")==0||strcmp(a, "Apr")==0) return 4;
+    else if (strcmp(a, "Mei")==0) return 5;
+    else if (strcmp(a, "Juni")==0||strcmp(a, "Jun")==0) return 6;
+    else if (strcmp(a, "Juli")==0||strcmp(a, "Jul")==0) return 7;
+    else if (strcmp(a, "Agustus")==0||strcmp(a, "Agu")==0) return 8;
+    else if (strcmp(a, "September")==0||strcmp(a, "Sep")==0) return 9;
+    else if (strcmp(a, "Oktober")==0||strcmp(a, "Okt")==0) return 10;
+    else if (strcmp(a, "November")==0||strcmp(a, "Nov")==0) return 11;
+    else if (strcmp(a, "Desember")==0||strcmp(a, "Des")==0) return 12;
+    else return -1; // Error case
+}
+
+
 // create a function to print pasien linked list
 void printPasienList(Pasien* head) {
     Pasien* temp = head;
@@ -437,24 +455,7 @@ void printTotalBiayaPerBulanTahun(penghasilan* mergedArray, int mergedCount) {
 }
 
 
-/* how to use
-int bulanToNumber (char a []){
-
-    if (strcmp(a, "Januari")==0||strcmp(a, "Jan")==0) return 1;
-    else if (strcmp(a, "Februari")==0||strcmp(a, "Feb")==0) return 2;
-    else if (strcmp(a, "Maret")==0||strcmp(a, "Mar")==0) return 3;
-    else if (strcmp(a, "April")==0||strcmp(a, "Apr")==0) return 4;
-    else if (strcmp(a, "Mei")==0) return 5;
-    else if (strcmp(a, "Juni")==0||strcmp(a, "Jun")==0) return 6;
-    else if (strcmp(a, "Juli")==0||strcmp(a, "Jul")==0) return 7;
-    else if (strcmp(a, "Agustus")==0||strcmp(a, "Agu")==0) return 8;
-    else if (strcmp(a, "September")==0||strcmp(a, "Sep")==0) return 9;
-    else if (strcmp(a, "Oktober")==0||strcmp(a, "Okt")==0) return 10;
-    else if (strcmp(a, "November")==0||strcmp(a, "Nov")==0) return 11;
-    else if (strcmp(a, "Desember")==0||strcmp(a, "Des")==0) return 12;
-    else return -1; // Error case
-}
-
+/*
 int main() {
     Riwayat riwayatArray[MAX];
     int count;

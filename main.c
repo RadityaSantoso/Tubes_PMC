@@ -49,7 +49,7 @@ int main() {
         mengubah_data_pasien(head);
         break;
     case 3:
-        //menghapus_data_pasian(&head);
+        //Menghapus data pasien
         menghapus_data_pasian(&head);
         break;
     case 4:
