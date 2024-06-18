@@ -72,13 +72,13 @@ int main() {
         tambahRiwayat2Pasien(&head_riwayat_pasien);
         break;
     case 6:
-        cariRiwayat2Pasien(head_riwayat_pasien);
+        ubahRiwayat2Pasien(head_riwayat_pasien);
         break;
     case 7:
         hapusRiwayat2Pasien(&head_riwayat_pasien);
         break;
     case 8:
-        ubahRiwayat2Pasien(head_riwayat_pasien);
+        cariRiwayat2Pasien(head_riwayat_pasien);
         break;
     case 9:
         // Memberikan info pasien dan riwayat medisnya kepada petugas medis
@@ -114,7 +114,9 @@ int main() {
         break;
     case 11:
         // Mendapat info jumlah pasien dan penyakit yang diderita (sorted)
+        file2 = fopen("Data/riwayatpasien.csv", "r");
         PasienTiapWaktu(file2);
+        fclose(file2);
         break;
     case 12:
         // Memberikan info untuk kontrol
