@@ -1,5 +1,4 @@
-// #include "header.c"
-// #include "Fitraka.c"
+
 /*
 #include <stdio.h>
 #include <stdlib.h>

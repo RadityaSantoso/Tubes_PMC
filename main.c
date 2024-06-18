@@ -8,15 +8,29 @@
 
 int main() {
     int ch;
-    FILE* file = fopen("Data/DataPMC20232024.csv", "r");
-    if (file == NULL) {
+    Riwayat riwayatArray[MAX];
+    int count;
+    char idpasiensearch[MAX];
+    //read Data Pasien
+    FILE* file1 = fopen("Data/DataPMC20232024.csv", "r");
+    if (file1 == NULL) {
         printf("Error opening file!\n");
         return 1;
     }
-
     Pasien* head = NULL;
-    bacaDataPasien(file, &head);
-    fclose(file);
+    bacaDataPasien(file1, &head);
+    fclose(file1);
+    
+    //read riwayat pasien
+    FILE* file2 = fopen("Data/riwayatpasien.csv", "r");
+    if (file2 == NULL) {
+        printf("Error opening file!\n");
+        return 1;
+    }
+    readCSV("riwayatpasien.csv", riwayatArray, &count);
+    replaceHyphenWithSpace(riwayatArray, count);
+    
+
     // Loop menu utama
     do {
         //gabisa nginput gatau kenapa
@@ -37,7 +51,12 @@ int main() {
         printf("14. Info untuk kontrol\n");
         printf("\nMasukan pilihan (pilih 0 untuk keluar) : ");
         scanf("%d", &ch);
-
+        riwayatwithtanggal riwayatWithTanggalArray[MAX];
+        penghasilan penghasilanArray[MAX];
+        penghasilan mergedArray[MAX];
+        penghasilantahun penghasilanTahunArray[MAX];
+        penghasilantahun mergedTahunArray[MAX];
+        int mergedCount, mergedTahunCount;
     switch (ch)
     {
     case 1:
@@ -70,18 +89,48 @@ int main() {
         break;
     case 9:
         // Memberikan info pasien dan riwayat medisnya kepada petugas medis
+        printf("Masukkan ID Pasien yang ingin dicari: ");
+        scanf("%[^\n]%*c", idpasiensearch);
+        printf("\n");
+        searchDataPasien(head, idpasiensearch);
+        searchRiwayat(riwayatArray, count, idpasiensearch);
         break;
     case 10:
         // Mendapat info laporan pendapatan bulanan
+        getriwayatwithtanggal(riwayatWithTanggalArray, riwayatArray, count);
+        add2000ToTahun(riwayatWithTanggalArray, count);
+        convertformat(riwayatWithTanggalArray, count, penghasilanArray);
+        mergePenghasilan(penghasilanArray, count, mergedArray, &mergedCount);
+        sortPenghasilan(mergedArray, mergedCount);
+        printTotalBiayaPerBulanTahun(mergedArray, mergedCount);
         break;
     case 11:
         // Mendapat info laporan pendapatan tahunan
+        getriwayatwithtanggal(riwayatWithTanggalArray, riwayatArray, count);
+        add2000ToTahun(riwayatWithTanggalArray, count);
+        convertformat(riwayatWithTanggalArray, count, penghasilanArray);
+        mergePenghasilan(penghasilanArray, count, mergedArray, &mergedCount);
+        sortPenghasilan(mergedArray, mergedCount);
+        fillPenghasilanTahunArray(mergedArray, mergedCount, penghasilanTahunArray, &mergedTahunCount);
+        printTotalBiayaPerTahun(penghasilanTahunArray, mergedTahunCount);
         break;
     case 12:
         // Mendapat informasi rata-rata pendapatan per tahun
+        getriwayatwithtanggal(riwayatWithTanggalArray, riwayatArray, count);
+        add2000ToTahun(riwayatWithTanggalArray, count);
+        convertformat(riwayatWithTanggalArray, count, penghasilanArray);
+        mergePenghasilan(penghasilanArray, count, mergedArray, &mergedCount);
+        sortPenghasilan(mergedArray, mergedCount);
+        printTotalBiayaPerBulanTahun(mergedArray, mergedCount);
+        fillPenghasilanTahunArray(mergedArray, mergedCount, penghasilanTahunArray, &mergedTahunCount);
+        printTotalBiayaPerTahun(penghasilanTahunArray, mergedTahunCount);
+        int avgyear = findAverageBiayaPerTahun(penghasilanTahunArray, mergedTahunCount);
+        printf("\n");
+        printf("Rata-rata pendapatan per tahun adalah %d\n", avgyear);
         break;
     case 13:
         // Mendapat info jumlah pasien dan penyakit yang diderita (sorted)
+        PasienTiapWaktu(file2);
         break;
     case 14:
         // Memberikan info untuk kontrol
