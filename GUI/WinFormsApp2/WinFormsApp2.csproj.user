@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <Compile Update="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="hapus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="HapusRiwayat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="opsi 1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="opsi2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="opsi3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="opsi4.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="opsi5.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="opsi6.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="tambahpasien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="TambahRiwayat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ubahpasien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UbahRiwayat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>
