@@ -9,7 +9,7 @@
 int main() {
     int ch;
     Riwayat riwayatArray[MAX];
-    int count;
+    int count=0;
     char idpasiensearch[MAX];
     //read Data Pasien
     FILE* file1 = fopen("Data/DataPMC20232024.csv", "r");
@@ -27,7 +27,8 @@ int main() {
         printf("Error opening file!\n");
         return 1;
     }
-    readCSV("riwayatpasien.csv", riwayatArray, &count);
+    fclose(file2);
+    readCSV("Data/riwayatpasien.csv", riwayatArray, &count);
     replaceHyphenWithSpace(riwayatArray, count);
     
 
@@ -51,12 +52,6 @@ int main() {
         printf("14. Info untuk kontrol\n");
         printf("\nMasukan pilihan (pilih 0 untuk keluar) : ");
         scanf("%d", &ch);
-        riwayatwithtanggal riwayatWithTanggalArray[MAX];
-        penghasilan penghasilanArray[MAX];
-        penghasilan mergedArray[MAX];
-        penghasilantahun penghasilanTahunArray[MAX];
-        penghasilantahun mergedTahunArray[MAX];
-        int mergedCount, mergedTahunCount;
     switch (ch)
     {
     case 1:
@@ -96,26 +91,18 @@ int main() {
         searchRiwayat(riwayatArray, count, idpasiensearch);
         break;
     case 10:
-        // Mendapat info laporan pendapatan bulanan
-        getriwayatwithtanggal(riwayatWithTanggalArray, riwayatArray, count);
-        add2000ToTahun(riwayatWithTanggalArray, count);
-        convertformat(riwayatWithTanggalArray, count, penghasilanArray);
-        mergePenghasilan(penghasilanArray, count, mergedArray, &mergedCount);
-        sortPenghasilan(mergedArray, mergedCount);
-        printTotalBiayaPerBulanTahun(mergedArray, mergedCount);
         break;
     case 11:
-        // Mendapat info laporan pendapatan tahunan
-        getriwayatwithtanggal(riwayatWithTanggalArray, riwayatArray, count);
-        add2000ToTahun(riwayatWithTanggalArray, count);
-        convertformat(riwayatWithTanggalArray, count, penghasilanArray);
-        mergePenghasilan(penghasilanArray, count, mergedArray, &mergedCount);
-        sortPenghasilan(mergedArray, mergedCount);
-        fillPenghasilanTahunArray(mergedArray, mergedCount, penghasilanTahunArray, &mergedTahunCount);
-        printTotalBiayaPerTahun(penghasilanTahunArray, mergedTahunCount);
         break;
     case 12:
         // Mendapat informasi rata-rata pendapatan per tahun
+        riwayatwithtanggal riwayatWithTanggalArray[MAX];
+        penghasilan penghasilanArray[MAX];
+        penghasilan mergedArray[MAX];
+        penghasilantahun penghasilanTahunArray[MAX];
+        penghasilantahun mergedTahunArray[MAX];
+        int mergedCount, mergedTahunCount;
+        char idpasiensearch[MAX];
         getriwayatwithtanggal(riwayatWithTanggalArray, riwayatArray, count);
         add2000ToTahun(riwayatWithTanggalArray, count);
         convertformat(riwayatWithTanggalArray, count, penghasilanArray);

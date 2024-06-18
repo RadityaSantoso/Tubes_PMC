@@ -449,7 +449,6 @@ void printTotalBiayaPerBulanTahun(penghasilan* mergedArray, int mergedCount) {
         else if (mergedArray[i].bulan == 12){
             printf("Penghasilan klinik bulan Desember %d adalah %d\n", mergedArray[i].tahun, mergedArray[i].biaya); 
         }
-
     }
 }
 
