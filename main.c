@@ -10,7 +10,7 @@ int main() {
     int ch;
     Riwayat riwayatArray[MAX];
     int count=0;
-    char idpasiensearch[MAX];
+    char IDpasiensearch[MAX];
     //read Data Pasien
     FILE* file1 = fopen("Data/DataPMC20232024.csv", "r");
     if (file1 == NULL) {
@@ -45,11 +45,9 @@ int main() {
         printf("7.  Menghapus riwayat diagnosis dan penanganan\n");
         printf("8.  Mencari riwayat diagnosis dan penanganan\n");
         printf("9.  Info pasien dan riwayat medisnya\n");
-        printf("10. Info pendapatan bulanan\n");
-        printf("11. Info pendapatan tahunan\n");
-        printf("12. Info rata-rata pendapatan per tahun\n");
-        printf("13. Info jumlah pasien dan penyakitnya\n");
-        printf("14. Info untuk kontrol\n");
+        printf("10. Info pendapatan bulanan, pendapatan tahunan, dan rata-rata pendapatan per tahun\n");
+        printf("11. Info jumlah pasien dan penyakitnya\n");
+        printf("12. Info untuk kontrol\n");
         printf("\nMasukan pilihan (pilih 0 untuk keluar) : ");
         scanf("%d", &ch);
     switch (ch)
@@ -85,16 +83,15 @@ int main() {
     case 9:
         // Memberikan info pasien dan riwayat medisnya kepada petugas medis
         printf("Masukkan ID Pasien yang ingin dicari: ");
-        scanf("%[^\n]%*c", idpasiensearch);
+        fgets(IDpasiensearch,MAX,stdin);
+        fgets(IDpasiensearch,MAX,stdin);
+        IDpasiensearch[strlen(IDpasiensearch)-1]='\0';
+        //scanf("%[^\n]%*c", idpasiensearch);
         printf("\n");
-        searchDataPasien(head, idpasiensearch);
-        searchRiwayat(riwayatArray, count, idpasiensearch);
+        searchDataPasien(head, IDpasiensearch);
+        searchRiwayat(riwayatArray, count, IDpasiensearch);
         break;
     case 10:
-        break;
-    case 11:
-        break;
-    case 12:
         // Mendapat informasi rata-rata pendapatan per tahun
         riwayatwithtanggal riwayatWithTanggalArray[MAX];
         penghasilan penghasilanArray[MAX];
@@ -115,11 +112,11 @@ int main() {
         printf("\n");
         printf("Rata-rata pendapatan per tahun adalah %d\n", avgyear);
         break;
-    case 13:
+    case 11:
         // Mendapat info jumlah pasien dan penyakit yang diderita (sorted)
         PasienTiapWaktu(file2);
         break;
-    case 14:
+    case 12:
         // Memberikan info untuk kontrol
         break;
     case 0:
