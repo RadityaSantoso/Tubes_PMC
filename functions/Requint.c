@@ -226,9 +226,9 @@ void PasienTiapWaktu (FILE *file){
         free(tempYear);
     }
 }
-
-int Fungsi13(){
-    FILE *file = fopen("riwayatpasien.csv", "r");
+/*
+int main(){
+    FILE *file = fopen("Cleanedriwayatpasien.csv", "r");
 
     if (file == NULL) {
         printf("Error opening file!\n");
@@ -236,3 +236,4 @@ int Fungsi13(){
     }
     PasienTiapWaktu(file);
 }
+*/

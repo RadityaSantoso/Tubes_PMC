@@ -114,9 +114,9 @@ int main() {
         break;
     case 11:
         // Mendapat info jumlah pasien dan penyakit yang diderita (sorted)
-        file2 = fopen("Data/riwayatpasien.csv", "r");
-        PasienTiapWaktu(file2);
-        fclose(file2);
+        FILE* file3 = fopen("Data/Cleanedriwayatpasien.csv", "r");
+        PasienTiapWaktu(file3);
+        fclose(file3);
         break;
     case 12:
         // Memberikan info untuk kontrol
