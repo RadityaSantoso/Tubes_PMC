@@ -5,7 +5,6 @@
 #include "functions/Raditya.c"
 #include "functions/Requint.c"
 
-
 int main() {
     int ch;
     Riwayat riwayatArray[MAX];
@@ -31,7 +30,7 @@ int main() {
     Riwayat2* head_riwayat_pasien = bacaRiwayat2PasienFile("Data/riwayatpasien.csv");
     readCSV("Data/riwayatpasien.csv", riwayatArray, &count);
     replaceHyphenWithSpace(riwayatArray, count);
-    
+    Node3* head_riwayat_pasien_2 = createLinkedListFromFile("Data/Cleanedriwayatpasien.csv");
 
     // Loop menu utama
     do {
@@ -119,6 +118,12 @@ int main() {
         break;
     case 12:
         // Memberikan info untuk kontrol
+        int day, month, year;
+
+        scanf("%d %d %d", &year, &month, &day);
+
+        printf("Info pasien yang dikontrol pada tanggal %d-%d-%d:\n", year, month, day);
+        printPatientInfoByControlDate(head_riwayat_pasien_2, day, month, year);
         break;
     case 0:
         printf("Terima kasih telah menggunakan program ini. Program telah ditutup.\n");
