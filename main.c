@@ -12,7 +12,7 @@ int main() {
     int count=0;
     char IDpasiensearch[MAX];
     //read Data Pasien
-    FILE* file1 = fopen("Data/DataPMC20232024.csv", "r");
+    FILE* file1 = fopen("Data/datapasien.csv", "r");
     if (file1 == NULL) {
         printf("Error opening file!\n");
         return 1;
@@ -129,20 +129,19 @@ int main() {
     printf("Tekan tombol apapun untuk melanjutkan\n");
     _getch();  // Menunggu input dari user sebelum melanjutkan
     } while (ch != 0);  // Loop terus menerus hingga user memilih keluar (0)
-    /*
-    int check=0;
-    do{
-    printf("\nMasukkan nama folder yang akan menyetor file baru.\n");
-    char filedir[MAX];
-    check = mkdir(filedir);
-    if(!check){
-        printf("Pembuatan file Berhasil.\n");
+    
+    //Save data
+    file1=fopen("Data/datapasien.csv","w");
+    Pasien* temp = head;
+    int count_write_index=1;
+    fprintf(file1,"\"No\",\"Nama Lengkap\",\"Alamat\",\"Kota\",\"Tempat Lahir\",\"Tanggal Lahir\",\"Umur (th)\",\"No BPJS\",\"ID Pasien\"\n");
+    while(temp!=NULL){
+        fprintf(file1,"\"%d\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%d\",\"%s\",\"%s\"\n"
+                ,count_write_index,temp->nama_lengkap,temp->alamat,temp->kota,temp->tempat_lahir,temp->tanggal_lahir,temp->umur,temp->no_bpjs,temp->id_pasien);
+        temp=temp->next;
+        count_write_index++;
     }
-    else{
-        printf("Pembuatan file Gagal.\n");
-    }
-    }while(check!=1);
-    */
+    fclose(file1);
     // Bebaskan memori dari linked list sebelum keluar dari program
     freeList(head);
   return 0;
