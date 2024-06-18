@@ -1,24 +1,14 @@
 # Tubes_PMC
-Tempat nyatuin kode tubes
+Raditya Anggara N. Santoso
+Mohammad Adam Febrian
+Dennis Hubert
+Fitraka Ario Sutansyah
+Requint Nurliawan
 
 
-## Cara kontribusi:
-### 1. Clone Repo:
-```
-git clone https://github.com/Ario-sut/Tubes_PMC.git
-```
-
-### 2. Buat branch baru
-```
-git checkout -b "nama-branch"
-```
-Misal "nama-branch" : "branch-bambank"
-
-### 3. Add, commit, push
-```
-git add .
-```
-```
-git commit -m "message"
-```
-Misal "message" : update
+## Pemakaian Program:
+### C tanpa GUI
+Export/clone seluruh repo ke salah satu folder dan run main.c
+Program akan berjalan
+### GUI
+Export folder GUI ke salah satu folder dan run exe
