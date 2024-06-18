@@ -1,6 +1,24 @@
 
-//#include "header.c"
+
 // Fungsi untuk membuat node baru untuk pasien
+typedef struct Biaya2 {
+    int no;
+    char aktivitas[MAX];
+    int biaya;
+    struct Biaya2* next;
+} Biaya2;
+
+typedef struct Riwayat2 {
+    int no;
+    char tanggal[MAX];
+    char id_pasien[MAX];
+    char diagnosis[MAX];
+    char tindakan[MAX];
+    char kontrol[MAX];
+    int biaya;
+    struct Riwayat2* next;
+} Riwayat2;
+
 Pasien* createPasien(char* nama_lengkap, char* alamat, char* kota, char* tempat_lahir, char* tanggal_lahir, int umur, char* no_bpjs, char* id_pasien) {
     Pasien* newPasien = (Pasien*)malloc(sizeof(Pasien));
     strcpy(newPasien->nama_lengkap, nama_lengkap);
@@ -84,9 +102,9 @@ void bacaDataPasien(FILE* file, Pasien** head) {
         insertPasien(head, newPasien);
     }
 }
-/*
-// Fungsi untuk membaca file biaya tindakan dan mengisi linked list
-Biaya* bacaBiayaFile(const char* filename) {
+
+// Fungsi untuk membaca file Riwayat2 pasien dan mengisi linked list
+Riwayat2* bacaRiwayat2PasienFile(const char* filename) {
     FILE* file = fopen(filename, "r");
     if (!file) {
         perror("Gagal membuka file");
@@ -94,49 +112,16 @@ Biaya* bacaBiayaFile(const char* filename) {
     }
 
     char line[MAX_LINE];
-    Biaya* head = NULL;
-    Biaya* current = NULL;
+    Riwayat2* head = NULL;
+    Riwayat2* current = NULL;
 
     // Lewati header
     fgets(line, MAX_LINE, file);
 
     while (fgets(line, MAX_LINE, file)) {
-        Biaya* newNode = (Biaya*)malloc(sizeof(Biaya));
-        sscanf(line, "%d,%49[^,],\"%d", &newNode->no, newNode->aktivitas, &newNode->biaya);
-        newNode->next = NULL;
-
-        if (head == NULL) {
-            head = newNode;
-            current = head;
-        } else {
-            current->next = newNode;
-            current = current->next;
-        }
-    }
-
-    fclose(file);
-    return head;
-}
-
-// Fungsi untuk membaca file riwayat pasien dan mengisi linked list
-Riwayat* bacaRiwayatPasienFile(const char* filename) {
-    FILE* file = fopen(filename, "r");
-    if (!file) {
-        perror("Gagal membuka file");
-        return NULL;
-    }
-
-    char line[MAX_LINE];
-    Riwayat* head = NULL;
-    Riwayat* current = NULL;
-
-    // Lewati header
-    fgets(line, MAX_LINE, file);
-
-    while (fgets(line, MAX_LINE, file)) {
-        Riwayat* newNode = (Riwayat*)malloc(sizeof(Riwayat));
+        Riwayat2* newNode = (Riwayat2*)malloc(sizeof(Riwayat2));
         sscanf(line, "%d,%49[^,],%19[^,],%49[^,],%49[^,],%49[^,],%d",
-               &newNode->no, newNode->tanggal, newNode->idPasien, newNode->diagnosis, newNode->tindakan, newNode->kontrol, &newNode->biaya);
+               &newNode->no, newNode->tanggal, newNode->id_pasien, newNode->diagnosis, newNode->tindakan, newNode->kontrol, &newNode->biaya);
         
         
         newNode->next = NULL;
@@ -154,9 +139,9 @@ Riwayat* bacaRiwayatPasienFile(const char* filename) {
     return head;
 }
 
-void tambahRiwayatPasien(Riwayat** head) {
-    Riwayat* newNode = (Riwayat*)malloc(sizeof(Riwayat));
-    printf("Masukkan nomor riwayat: ");
+void tambahRiwayat2Pasien(Riwayat2** head) {
+    Riwayat2* newNode = (Riwayat2*)malloc(sizeof(Riwayat2));
+    printf("Masukkan nomor Riwayat2: ");
     scanf("%d", &newNode->no);
     getchar(); // Consumes the newline character left in the input buffer by scanf
 
@@ -165,8 +150,8 @@ void tambahRiwayatPasien(Riwayat** head) {
     newNode->tanggal[strcspn(newNode->tanggal, "\n")] = '\0'; // Remove newline character if present
 
     printf("Masukkan ID Pasien: ");
-    fgets(newNode->idPasien, sizeof(newNode->idPasien), stdin);
-    newNode->idPasien[strcspn(newNode->idPasien, "\n")] = '\0'; // Remove newline character if present
+    fgets(newNode->id_pasien, sizeof(newNode->id_pasien), stdin);
+    newNode->id_pasien[strcspn(newNode->id_pasien, "\n")] = '\0'; // Remove newline character if present
 
     printf("Masukkan diagnosis: ");
     fgets(newNode->diagnosis, sizeof(newNode->diagnosis), stdin);
@@ -192,7 +177,7 @@ void tambahRiwayatPasien(Riwayat** head) {
     if (*head == NULL) {
         *head = newNode;
     } else {
-        Riwayat* current = *head;
+        Riwayat2* current = *head;
         while (current->next != NULL) {
             current = current->next;
         }
@@ -200,56 +185,56 @@ void tambahRiwayatPasien(Riwayat** head) {
     }
 }
 
-// Fungsi untuk mencari riwayat pasien berdasarkan ID Pasien dan tanggal
-void cariRiwayatPasien(Riwayat* head) {
-    char idPasien[20];
+// Fungsi untuk mencari Riwayat2 pasien berdasarkan ID Pasien dan tanggal
+void cariRiwayat2Pasien(Riwayat2* head) {
+    char id_pasien[20];
     char tanggal[50];
 
     printf("Masukkan ID Pasien: ");
-    fgets(idPasien, sizeof(idPasien), stdin);
-    fgets(idPasien, sizeof(idPasien), stdin);
-    idPasien[strcspn(idPasien, "\n")] = '\0'; // Remove newline character if present
+    fgets(id_pasien, sizeof(id_pasien), stdin);
+    fgets(id_pasien, sizeof(id_pasien), stdin);
+    id_pasien[strcspn(id_pasien, "\n")] = '\0'; // Remove newline character if present
 
     printf("Masukkan tanggal (format DD MMM YYYY): ");
     fgets(tanggal, sizeof(tanggal), stdin);
     tanggal[strcspn(tanggal, "\n")] = '\0'; // Remove newline character if present
 
-    Riwayat* current = head;
+    Riwayat2* current = head;
     bool found = false;
 
     while (current != NULL) {
-        if (strcmp(current->idPasien, idPasien) == 0 && strcmp(current->tanggal, tanggal) == 0) {
+        if (strcmp(current->id_pasien, id_pasien) == 0 && strcmp(current->tanggal, tanggal) == 0) {
             found = true;
             printf("No: %d, Tanggal: %s, ID Pasien: %s, Diagnosis: %s, Tindakan: %s, Kontrol: %s, Biaya: %d\n",
-                   current->no, current->tanggal, current->idPasien, current->diagnosis, current->tindakan, current->kontrol, current->biaya);
+                   current->no, current->tanggal, current->id_pasien, current->diagnosis, current->tindakan, current->kontrol, current->biaya);
         }
         current = current->next;
     }
 
     if (!found) {
-        printf("Riwayat pasien dengan ID Pasien %s pada tanggal %s tidak ditemukan.\n", idPasien, tanggal);
+        printf("Riwayat2 pasien dengan ID Pasien %s pada tanggal %s tidak ditemukan.\n", id_pasien, tanggal);
     }
 }
 
-void hapusRiwayatPasien(Riwayat** head) {
-    char idPasien[20];
+void hapusRiwayat2Pasien(Riwayat2** head) {
+    char id_pasien[20];
     char tanggal[50];
 
-    printf("Masukkan ID Pasien untuk menghapus riwayat: ");
-    fgets(idPasien, sizeof(idPasien), stdin);
-    fgets(idPasien, sizeof(idPasien), stdin);
-    idPasien[strcspn(idPasien, "\n")] = '\0'; // Remove newline character if present
+    printf("Masukkan ID Pasien untuk menghapus Riwayat: ");
+    fgets(id_pasien, sizeof(id_pasien), stdin);
+    fgets(id_pasien, sizeof(id_pasien), stdin);
+    id_pasien[strcspn(id_pasien, "\n")] = '\0'; // Remove newline character if present
 
-    printf("Masukkan tanggal riwayat (format DD MMM YYYY): ");
+    printf("Masukkan tanggal Riwayat (format DD MMM YYYY): ");
     fgets(tanggal, sizeof(tanggal), stdin);
     tanggal[strcspn(tanggal, "\n")] = '\0'; // Remove newline character if present
     
-    Riwayat* current = *head;
-    Riwayat* prev = NULL;
+    Riwayat2* current = *head;
+    Riwayat2* prev = NULL;
     bool found = false;
 
     while (current != NULL) {
-        if (strcmp(current->idPasien, idPasien) == 0 && strcmp(current->tanggal, tanggal) == 0) {
+        if (strcmp(current->id_pasien, id_pasien) == 0 && strcmp(current->tanggal, tanggal) == 0) {
             found = true;
             if (prev == NULL) {
                 *head = current->next;
@@ -257,7 +242,7 @@ void hapusRiwayatPasien(Riwayat** head) {
                 prev->next = current->next;
             }
             free(current);
-            printf("Riwayat pasien dengan ID Pasien %s pada tanggal %s berhasil dihapus.\n", idPasien, tanggal);
+            printf("Riwayat2 pasien dengan ID Pasien %s pada tanggal %s berhasil dihapus.\n", id_pasien, tanggal);
             break;
         }
         prev = current;
@@ -265,32 +250,32 @@ void hapusRiwayatPasien(Riwayat** head) {
     }
 
     if (!found) {
-        printf("Riwayat pasien dengan ID Pasien %s pada tanggal %s tidak ditemukan.\n", idPasien, tanggal);
+        printf("Riwayat2 pasien dengan ID Pasien %s pada tanggal %s tidak ditemukan.\n", id_pasien, tanggal);
     }
 }
 
 
-void ubahRiwayatPasien(Riwayat* head) {
-    char idPasien[20];
+void ubahRiwayat2Pasien(Riwayat2* head) {
+    char id_pasien[20];
     char tanggal[20];
 
     printf("Masukkan ID Pasien yang ingin diubah: ");
-    fgets(idPasien, sizeof(idPasien), stdin);
-    fgets(idPasien, sizeof(idPasien), stdin);
-    idPasien[strcspn(idPasien, "\n")] = '\0'; // Remove newline character if present
+    fgets(id_pasien, sizeof(id_pasien), stdin);
+    fgets(id_pasien, sizeof(id_pasien), stdin);
+    id_pasien[strcspn(id_pasien, "\n")] = '\0'; // Remove newline character if present
 
-    printf("Masukkan tanggal riwayat: ");
+    printf("Masukkan tanggal Riwayat: ");
     fgets(tanggal, sizeof(tanggal), stdin);
     tanggal[strcspn(tanggal, "\n")] = '\0'; // Remove newline character if present
 
-    Riwayat* current = head;
+    Riwayat2* current = head;
     bool found = false;
 
     while (current != NULL) {
-        if (strcmp(current->idPasien, idPasien) == 0 && strcmp(current->tanggal, tanggal) == 0) {
+        if (strcmp(current->id_pasien, id_pasien) == 0 && strcmp(current->tanggal, tanggal) == 0) {
             found = true;
 
-            // Mengubah data riwayat pasien
+            // Mengubah data Riwayat2 pasien
             printf("Masukkan tanggal: ");
             fgets(current->tanggal, sizeof(current->tanggal), stdin);
             fgets(current->tanggal, sizeof(current->tanggal), stdin);
@@ -311,29 +296,52 @@ void ubahRiwayatPasien(Riwayat* head) {
             printf("Masukkan biaya: ");
             scanf("%d", &current->biaya);
 
-            printf("Riwayat pasien dengan ID Pasien %s dan tanggal %s telah diubah.\n", idPasien, tanggal);
+            printf("Riwayat pasien dengan ID Pasien %s dan tanggal %s telah diubah.\n", id_pasien, tanggal);
             break;
         }
         current = current->next;
     }
 
     if (!found) {
-        printf("Riwayat pasien dengan ID Pasien %s dan tanggal %s tidak ditemukan.\n", idPasien, tanggal);
+        printf("Riwayat pasien dengan ID Pasien %s dan tanggal %s tidak ditemukan.\n", id_pasien, tanggal);
     }
 }
 
+// Fungsi untuk menyimpan linked list Riwayat2 pasien ke file
+void simpanRiwayat2PasienKeFile(Riwayat2* head, const char* filename) {
+    FILE* file = fopen(filename, "w");
+    if (!file) {
+        perror("Gagal membuka file");
+        return;
+    }
+
+    fprintf(file, "No,Tanggal,ID Pasien,Diagnosis,Tindakan,Kontrol,Biaya\n");
+
+    Riwayat2* current = head;
+    while (current != NULL) {
+        fprintf(file, "%d,%s,%s,%s,%s,%s,%d\n",
+                current->no, current->tanggal, current->id_pasien, current->diagnosis,
+                current->tindakan, current->kontrol, current->biaya);
+        current = current->next;
+    }
+
+    fclose(file);
+}
 /*
  case 5:
-    tambahRiwayatPasien(&riwayatPasienHead);
+    tambahRiwayat2Pasien(&Riwayat2PasienHead);
     break;
 case 6:
-    cariRiwayatPasien(riwayatPasienHead);
+    cariRiwayat2Pasien(Riwayat2PasienHead);
     break;
 case 7:
-    hapusRiwayatPasien(&riwayatPasienHead);
+    hapusRiwayat2Pasien(&Riwayat2PasienHead);
     break;
 case 8:
-    ubahRiwayatPasien(riwayatPasienHead);
+    ubahRiwayat2Pasien(Riwayat2PasienHead);
     break;
+case 0:
+    simpanRiwayat2PasienKeFile(Riwayat2PasienHead, "Riwayat2pasien2.csv");
+    return 0;
 */
 

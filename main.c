@@ -17,8 +17,8 @@ int main() {
         printf("Error opening file!\n");
         return 1;
     }
-    Pasien* head = NULL;
-    bacaDataPasien(file1, &head);
+    Pasien* head_data_pasien = NULL;
+    bacaDataPasien(file1, &head_data_pasien);
     fclose(file1);
     
     //read riwayat pasien
@@ -28,6 +28,7 @@ int main() {
         return 1;
     }
     fclose(file2);
+    Riwayat2* head_riwayat_pasien = bacaRiwayat2PasienFile("Data/riwayatpasien.csv");
     readCSV("Data/riwayatpasien.csv", riwayatArray, &count);
     replaceHyphenWithSpace(riwayatArray, count);
     
@@ -54,31 +55,31 @@ int main() {
     {
     case 1:
         // Menambah data pasien
-        menambah_data_pasien(&head);
+        menambah_data_pasien(&head_data_pasien);
         break;
     case 2:
         // Mengubah data pasien
-        mengubah_data_pasien(head);
+        mengubah_data_pasien(head_data_pasien);
         break;
     case 3:
         //Menghapus data pasien
-        menghapus_data_pasian(&head);
+        menghapus_data_pasian(&head_data_pasien);
         break;
     case 4:
         // Mencari data pasien dan print
-        print_pasien(head);
+        print_pasien(head_data_pasien);
         break;
     case 5:
-        // Menambah riwayat diagnosis dan penanganan
+        tambahRiwayat2Pasien(&head_riwayat_pasien);
         break;
     case 6:
-        // Mengubah riwayat diagnosis dan penanganan
+        cariRiwayat2Pasien(head_riwayat_pasien);
         break;
     case 7:
-        // Menghapus riwayat diagnosis dan penanganan
+        hapusRiwayat2Pasien(&head_riwayat_pasien);
         break;
     case 8:
-        // Mencari riwayat diagnosis dan penanganan
+        ubahRiwayat2Pasien(head_riwayat_pasien);
         break;
     case 9:
         // Memberikan info pasien dan riwayat medisnya kepada petugas medis
@@ -88,7 +89,7 @@ int main() {
         IDpasiensearch[strlen(IDpasiensearch)-1]='\0';
         //scanf("%[^\n]%*c", idpasiensearch);
         printf("\n");
-        searchDataPasien(head, IDpasiensearch);
+        searchDataPasien(head_data_pasien, IDpasiensearch);
         searchRiwayat(riwayatArray, count, IDpasiensearch);
         break;
     case 10:
@@ -132,17 +133,20 @@ int main() {
     
     //Save data
     file1=fopen("Data/datapasien.csv","w");
-    Pasien* temp = head;
+    Pasien* temp = head_data_pasien;
     int count_write_index=1;
     fprintf(file1,"\"No\",\"Nama Lengkap\",\"Alamat\",\"Kota\",\"Tempat Lahir\",\"Tanggal Lahir\",\"Umur (th)\",\"No BPJS\",\"ID Pasien\"\n");
     while(temp!=NULL){
-        fprintf(file1,"\"%d\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%d\",\"%s\",\"%s\"\n"
+        fprintf(file1,"\"%d\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%d\",\"%s\",\"%s\""
                 ,count_write_index,temp->nama_lengkap,temp->alamat,temp->kota,temp->tempat_lahir,temp->tanggal_lahir,temp->umur,temp->no_bpjs,temp->id_pasien);
+        if(temp->next!=NULL){
+            fprintf(file1,"\n");
+        }
         temp=temp->next;
         count_write_index++;
     }
     fclose(file1);
     // Bebaskan memori dari linked list sebelum keluar dari program
-    freeList(head);
+    freeList(head_data_pasien);
   return 0;
 }
